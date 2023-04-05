@@ -30,4 +30,14 @@ class BiathlonTest {
         assertEquals("Second name", testApp.displayResults(athleteList).get(1).name);
         assertEquals("First name", testApp.displayResults(athleteList).get(2).name);
     }
+
+    @Test
+    void createAthlete() {
+        Biathlon testApp = new Biathlon();
+        List<String> testString = Arrays.asList("12","Hegyesi Andrea","RO","3:20","xxxxx","xxoxx","xxxxx");
+        Athlete testAthlete = testApp.createAthlete(testString);
+        assertEquals("Hegyesi Andrea", testAthlete.name);
+        assertEquals(200, testAthlete.time);
+        assertEquals(10, testAthlete.penalty);
+    }
 }

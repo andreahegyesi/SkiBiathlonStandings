@@ -53,6 +53,16 @@ public class Biathlon {
         return second / 60 + ":" + second % 60;
     }
 
+    public Athlete createAthlete(List<String> stringList){
+        String name = stringList.get(1);
+        int time = stringToSeconds(stringList.get(3));
+        String firstShot = stringList.get(4);
+        String secondShot = stringList.get(5);
+        String thirdShot = stringList.get(6);
+        return new Athlete(name,time, firstShot, secondShot, thirdShot);
+
+    }
+
     public static void main(String[] args) {
         Biathlon app = new Biathlon();
         Scanner scanner = null;
@@ -60,9 +70,8 @@ public class Biathlon {
             scanner = new Scanner(
                     new File("C:\\Users\\andi1\\IdeaProjects\\SkiBiathlonStandings\\src\\main\\java\\org\\example\\results.csv"));
             while (scanner.hasNextLine()) {
-                List<String> temp = parseLine(scanner.nextLine());
-                int seconds = stringToSeconds(temp.get(3));
-                app.athletes.add(new Athlete(temp.get(1), seconds, temp.get(4), temp.get(5), temp.get(6)));
+                List<String> line = parseLine(scanner.nextLine());
+                app.athletes.add(app.createAthlete(line));
             }
         } catch (IOException e) {
             System.out.println("File not found");
